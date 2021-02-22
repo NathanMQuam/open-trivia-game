@@ -12,7 +12,7 @@ function _draw() {
 
    questions.forEach(q => result += q.Template)
 
-   document.getElementById('app').innerHTML = /*html*/``
+   //document.getElementById('app').innerHTML = /*html*/``
 }
 
 function _newTriviaGame() {
