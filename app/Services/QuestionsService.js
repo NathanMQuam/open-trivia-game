@@ -15,6 +15,14 @@ class QuestionsService {
       }).catch(err => console.error(err))
    }
 
+   answer(questionId, answer) {
+      let question = ProxyState.questions.find(q => q.id == questionId)
+      if(answer == question.correctAnswer)
+         console.log(questionId, answer, 'Correct!');
+      else 
+         console.log(questionId, answer, 'Incorrect');
+   }
+
 }
 
 export const questionsService = new QuestionsService()

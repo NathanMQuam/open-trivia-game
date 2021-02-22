@@ -26,4 +26,8 @@ export default class {
    newTriviaGame() {
       questionsService.newTriviaGame()
    }
+
+   answer(questionId, answer) {
+      questionsService.answer(questionId, answer)
+   }
 }
