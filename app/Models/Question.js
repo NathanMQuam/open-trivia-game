@@ -7,7 +7,7 @@ import { generateId } from '../Utils/generateId.js'
 function _insertCorrectAnswer(cA, iA) {
    let tempArr = [...iA, cA]
    let newArr = []
-   
+
    // console.log(tempArr, newArr);
    while (tempArr.length > 0) {
       // console.log(tempArr, newArr);
@@ -25,6 +25,7 @@ export default class Question {
       this.correctAnswer = data.correct_answer
       this.incorrectAnswers = data.incorrect_answers
       this.questionType = data.type
+      this.chosenAnswer = ''
 
       //this.allAnswers = _insertCorrectAnswer(this.correctAnswer, data.incorrect_answers)
       this.allAnswers = [this.correctAnswer, ...data.incorrect_answers]
@@ -33,25 +34,31 @@ export default class Question {
 
    get Template() {
       let template = ''
-      if (this.questionType == 'multiple') {
-         for (let i = 0; i < this.allAnswers.length; i++) {
-            let a = this.allAnswers[i]
-            template += /*html*/ `
-               <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
-            `
-         }
+
+      if (this.chosenAnswer != '') {
+         template = "Correct Answer: " + this.correctAnswer
       } else {
-         ['True', 'False'].forEach(a => template += /*html*/ `
-            <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
-         `)
+         if (this.questionType == 'multiple') {
+            for (let i = 0; i < this.allAnswers.length; i++) {
+               let a = this.allAnswers[i]
+               template += /*html*/ `
+                  <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
+               `
+            }
+         } else {
+            ['True', 'False'].forEach(a => template += /*html*/ `
+               <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
+            `)
+         }
       }
+
 
       return /*html*/ `
          <div class="row p-2">
             <div class="col card shadow p-3">
                <p>Category: ${this.category}</p>
                <p class="card shadow-sm p-2">${this.question}</p>
-               <p>Your answer: ''</p>
+               <p>Your answer: ${this.chosenAnswer}</p>
                <div class="row text-center">
                   ${template}
                </div>

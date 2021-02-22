@@ -17,10 +17,15 @@ class QuestionsService {
 
    answer(questionId, answer) {
       let question = ProxyState.questions.find(q => q.id == questionId)
-      if(answer == question.correctAnswer)
+      if(answer == question.correctAnswer) {
+         ProxyState.score.correct++
          console.log(questionId, answer, 'Correct!');
-      else 
+      } else {
+         ProxyState.score.incorrect++
          console.log(questionId, answer, 'Incorrect');
+      }
+      question.chosenAnswer = answer
+      ProxyState.questions = ProxyState.questions
    }
 
 }
