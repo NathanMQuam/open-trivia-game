@@ -1,5 +1,5 @@
 // @ts-ignore
 export const api = axios.create({
-   baseURL: 'https://swapi.dev/api/',
+   baseURL: 'https://opentdb.com/api.php',
    timeout: 3000
 })

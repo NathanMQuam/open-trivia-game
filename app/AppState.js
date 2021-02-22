@@ -6,11 +6,11 @@ import { isValidProp } from "./Utils/isValidProp.js"
 class AppState extends EventEmitter {
   /** @type {Value[]} */
   values = []
-  
-  score = {correct: 0, incorrect: 0}
+
+  score = { correct: 0, incorrect: 0 }
 
   /** @type {Question[]}*/
-  questions =[]
+  questions = []
 }
 
 export const ProxyState = new Proxy(new AppState(), {

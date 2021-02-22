@@ -12,11 +12,7 @@ function _draw() {
 
    questions.forEach(q => result += q.Template)
 
-   //document.getElementById('app').innerHTML = /*html*/``
-}
-
-function _newTriviaGame() {
-   questionsService.newTriviaGame()
+   document.getElementById('app').innerHTML = result
 }
 
 // Public
@@ -25,5 +21,9 @@ export default class {
       ProxyState.on("questions", _draw)
       _draw()
       console.log('Trivia Game Controller Initialized');
+   }
+
+   newTriviaGame() {
+      questionsService.newTriviaGame()
    }
 }
