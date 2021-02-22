@@ -23,6 +23,7 @@ export default class Question {
       this.question = data.question
       this.category = data.category
       this.correctAnswer = data.correct_answer
+      this.incorrectAnswers = data.incorrect_answers
       this.questionType = data.type
 
       //this.allAnswers = _insertCorrectAnswer(this.correctAnswer, data.incorrect_answers)
@@ -32,11 +33,17 @@ export default class Question {
 
    get Template() {
       let template = ''
-      for (let i = 0; i < this.allAnswers.length; i++) {
-         let a = this.allAnswers[i]
-         template += /*html*/ `
+      if (this.questionType == 'multiple') {
+         for (let i = 0; i < this.allAnswers.length; i++) {
+            let a = this.allAnswers[i]
+            template += /*html*/ `
+               <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
+            `
+         }
+      } else {
+         ['True', 'False'].forEach(a => template += /*html*/ `
             <div class="col-6 p-1"><button type="button" onclick="app.triviaGameController.answer('${this.id}', '${a}')" class="btn bg-light w-100 shadow-sm">${a}</button></div>
-         `
+         `)
       }
 
       return /*html*/ `
